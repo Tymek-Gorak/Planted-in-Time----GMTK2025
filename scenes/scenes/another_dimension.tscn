@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ks7mjml0yq4c"]
+
+[ext_resource type="PackedScene" uid="uid://bspqqatkc87t3" path="res://scenes/player.tscn" id="1_b7wy8"]
+[ext_resource type="PackedScene" uid="uid://ce3nvo5n8cq44" path="res://scenes/prefabs/push_box.tscn" id="3_1k2vr"]
+
+[node name="AnotherDimension" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_b7wy8")]
+position = Vector2(118, 111)
+
+[node name="PushBox" parent="." instance=ExtResource("3_1k2vr")]
+position = Vector2(69, 94)
+
+[node name="PushBox2" parent="." instance=ExtResource("3_1k2vr")]
+position = Vector2(119, 157)
+
+[node name="PushBox3" parent="." instance=ExtResource("3_1k2vr")]
+position = Vector2(221, 98)

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3om6j8l43uno"]
+
+[ext_resource type="Texture2D" uid="uid://cn8yelbyefwa2" path="res://icon.svg" id="1_4so1q"]
+[ext_resource type="Script" uid="uid://288uyh5bdbtw" path="res://scenes/prefabs/scipts/crystal_chunk.gd" id="1_y8420"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y8420"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4so1q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_4so1q")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y8420"]
+radius = 6.0
+
+[node name="CrystalChunk" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 6
+motion_mode = 1
+script = ExtResource("1_y8420")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.529302, 0.000205374, 0.530945, 1)
+scale = Vector2(0.063, 0.063)
+sprite_frames = SubResource("SpriteFrames_y8420")
+animation = &"spin"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y8420")
