@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhdjcky1gddv8"]
+
+[ext_resource type="Script" uid="uid://bkl6e3un7ygyl" path="res://scenes/scripts/cave_wall.gd" id="1_2ss4r"]
+[ext_resource type="Texture2D" uid="uid://cn8yelbyefwa2" path="res://icon.svg" id="2_ixe6o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmr5f"]
+size = Vector2(44, 12)
+
+[node name="CaveWall" type="StaticBody2D"]
+collision_layer = 6
+collision_mask = 0
+script = ExtResource("1_2ss4r")
+normal_sprite = ExtResource("2_ixe6o")
+metadata/_custom_type_script = "uid://ceyiiwot8d51o"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_ixe6o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_pmr5f")

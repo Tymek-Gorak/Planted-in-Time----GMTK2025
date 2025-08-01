@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ks7mjml0yq4c"]
+[gd_scene load_steps=9 format=3 uid="uid://ks7mjml0yq4c"]
 
 [ext_resource type="PackedScene" uid="uid://bspqqatkc87t3" path="res://scenes/player.tscn" id="1_b7wy8"]
 [ext_resource type="PackedScene" uid="uid://ce3nvo5n8cq44" path="res://scenes/prefabs/push_box.tscn" id="3_1k2vr"]
+[ext_resource type="PackedScene" uid="uid://cvsrvttiehibh" path="res://scenes/prefabs/floor_button.tscn" id="3_dm2c6"]
+[ext_resource type="PackedScene" uid="uid://tdql8t7vgpua" path="res://scenes/prefabs/raft.tscn" id="4_nckr8"]
+[ext_resource type="PackedScene" uid="uid://j00v5thc6gr3" path="res://scenes/main_camera.tscn" id="5_nckr8"]
+[ext_resource type="PackedScene" uid="uid://bl4eaaf3mkrsi" path="res://scenes/tn_t_lever.tscn" id="6_esj28"]
+[ext_resource type="PackedScene" uid="uid://dhdjcky1gddv8" path="res://scenes/cave_wall.tscn" id="7_ughpn"]
+[ext_resource type="PackedScene" uid="uid://c8dlcrswnme8j" path="res://scenes/prefabs/tnt.tscn" id="8_xlfl4"]
 
 [node name="AnotherDimension" type="Node2D"]
 
@@ -16,3 +22,44 @@ position = Vector2(119, 157)
 
 [node name="PushBox3" parent="." instance=ExtResource("3_1k2vr")]
 position = Vector2(221, 98)
+
+[node name="FloorButton" parent="." instance=ExtResource("3_dm2c6")]
+position = Vector2(212, 174)
+
+[node name="Raft" parent="FloorButton" instance=ExtResource("4_nckr8")]
+position = Vector2(63, -16)
+starting_position = 1
+
+[node name="Raft2" parent="FloorButton" instance=ExtResource("4_nckr8")]
+position = Vector2(63, 0)
+starting_position = 0
+
+[node name="Raft3" parent="FloorButton" instance=ExtResource("4_nckr8")]
+position = Vector2(63, 16)
+
+[node name="MainCamera" parent="." instance=ExtResource("5_nckr8")]
+position = Vector2(160, 120)
+
+[node name="TnTLever" parent="." instance=ExtResource("6_esj28")]
+position = Vector2(36, 209)
+
+[node name="CaveWall" parent="TnTLever" instance=ExtResource("7_ughpn")]
+position = Vector2(15, -178)
+
+[node name="Tnt" parent="TnTLever/CaveWall" instance=ExtResource("8_xlfl4")]
+position = Vector2(-28, 23)
+
+[node name="Tnt2" parent="TnTLever/CaveWall" instance=ExtResource("8_xlfl4")]
+position = Vector2(-9, 33)
+
+[node name="Tnt3" parent="TnTLever/CaveWall" instance=ExtResource("8_xlfl4")]
+position = Vector2(26, 24)
+
+[connection signal="screen_exited" from="Player" to="MainCamera" method="switch_screen"]
+[connection signal="pressed" from="FloorButton" to="FloorButton/Raft" method="move"]
+[connection signal="pressed" from="FloorButton" to="FloorButton/Raft2" method="move"]
+[connection signal="pressed" from="FloorButton" to="FloorButton/Raft3" method="move"]
+[connection signal="lever_press" from="TnTLever" to="TnTLever/CaveWall" method="explode"]
+[connection signal="lever_press" from="TnTLever" to="TnTLever/CaveWall/Tnt" method="explode"]
+[connection signal="lever_press" from="TnTLever" to="TnTLever/CaveWall/Tnt2" method="explode"]
+[connection signal="lever_press" from="TnTLever" to="TnTLever/CaveWall/Tnt3" method="explode"]

@@ -14,7 +14,7 @@ var cancel_loop := false:
 @onready var starting_position := position
 
 func _ready() -> void:
-	add_to_group("time_loopable_boxes")
+	add_to_group("time_loopables")
 
 func _physics_process(_delta: float) -> void:
 	if not velocity.is_zero_approx():

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvsrvttiehibh"]
+
+[ext_resource type="Script" uid="uid://pdlduwjwppf2" path="res://scenes/prefabs/scipts/floor_button.gd" id="1_g2r3h"]
+[ext_resource type="Texture2D" uid="uid://cn8yelbyefwa2" path="res://icon.svg" id="2_x68do"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4j7b3"]
+size = Vector2(14, 14)
+
+[node name="FloorButton" type="Area2D"]
+collision_layer = 0
+collision_mask = 9
+script = ExtResource("1_g2r3h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.0235294, 0.333333, 0.411765)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_x68do")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4j7b3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

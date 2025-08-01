@@ -1,23 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://da08feiexlvwr"]
+[gd_scene load_steps=10 format=3 uid="uid://da08feiexlvwr"]
 
 [ext_resource type="Shader" uid="uid://6fw2tn332xc0" path="res://assets/shaders/make_invisible_from_center.gdshader" id="1_nk83w"]
 [ext_resource type="Script" uid="uid://1821l21gs3pj" path="res://scenes/scripts/transition_manager.gd" id="1_sb1xu"]
-
-[sub_resource type="Animation" id="Animation_xa31j"]
-resource_name = "black_screen_transition"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect2:material:shader_parameter/radius")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(0.258816, 0.00571908),
-"update": 0,
-"values": [0.81, 0.0]
-}
+[ext_resource type="PackedScene" uid="uid://b4gvii211ygap" path="res://scenes/menu/time_loop_timer.tscn" id="3_t501d"]
 
 [sub_resource type="Animation" id="Animation_nk83w"]
 length = 0.001
@@ -34,6 +19,36 @@ tracks/0/keys = {
 "values": [2.0]
 }
 
+[sub_resource type="Animation" id="Animation_xa31j"]
+resource_name = "black_screen_transition"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect2:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.258816, 0.00571908),
+"update": 0,
+"values": [0.81, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TimeLoopTimer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"time_loop"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nk83w"]
 _data = {
 &"RESET": SubResource("Animation_nk83w"),
@@ -47,7 +62,7 @@ shader_parameter/radius = 2.0
 [sub_resource type="Gradient" id="Gradient_xa31j"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 1)
+colors = PackedColorArray(0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nk83w"]
 gradient = SubResource("Gradient_xa31j")
@@ -75,3 +90,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_nk83w")
+
+[node name="TimeLoopTimer" parent="." instance=ExtResource("3_t501d")]
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 36.0
+offset_bottom = 30.0
+grow_vertical = 1

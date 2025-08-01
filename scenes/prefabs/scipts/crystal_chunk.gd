@@ -15,4 +15,5 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(i).get_collider()
 		if collision is TimeLooper or collision is PushBox:
 			collision.cancel_loop = true
+			print(collision)
 		queue_free()

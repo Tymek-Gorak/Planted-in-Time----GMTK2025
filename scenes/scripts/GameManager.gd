@@ -12,11 +12,12 @@ func time_loop():
 	await transition_manager.transition_finished
 
 	var player : Player = get_tree().get_first_node_in_group("player")
-	player.time_loop()
-	for node : TimeLooper in get_tree().get_nodes_in_group("time_loopables"):
-		node.time_loop()
-	for node : PushBox in get_tree().get_nodes_in_group("time_loopable_boxes"):
-		node.time_loop()
-
+	if is_instance_valid(player):
+		player.time_loop()
+	for node in get_tree().get_nodes_in_group("time_loopables"):
+		if not is_instance_valid(node): continue
+		if node.has_method("time_loop"):
+			node.time_loop()
+	await get_tree().create_timer(.3).timeout
 	#exit transition
 	transition_manager.black_middle_fade_in()

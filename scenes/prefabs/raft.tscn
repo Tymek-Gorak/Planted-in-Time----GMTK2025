@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://tdql8t7vgpua"]
+
+[ext_resource type="Texture2D" uid="uid://cn8yelbyefwa2" path="res://icon.svg" id="1_0najr"]
+[ext_resource type="Script" uid="uid://ceictvb0cs2qb" path="res://scenes/prefabs/scipts/raft.gd" id="1_hbsry"]
+[ext_resource type="Script" uid="uid://446bhhqnq1rk" path="res://scenes/prefabs/scipts/raft_looper.gd" id="2_w60kk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbsry"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kes3"]
+size = Vector2(128, 128)
+
+[node name="Raft" type="Node2D"]
+script = ExtResource("1_hbsry")
+starting_position = -1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(16, 0)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_hbsry")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-16, 0)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_hbsry")
+
+[node name="TimeLooper" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.125, 0.125)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_w60kk")
+metadata/_custom_type_script = "uid://ceyiiwot8d51o"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TimeLooper"]
+shape = SubResource("RectangleShape2D_0kes3")
+
+[node name="Sprite2D" type="Sprite2D" parent="TimeLooper"]
+texture = ExtResource("1_0najr")

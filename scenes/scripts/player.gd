@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+signal screen_exited(leave_direction : Vector2)
 
 @export var MAX_SPEED := 250
 @export var ACCELERATION := 1200
@@ -14,6 +15,7 @@ var throw_direction := Vector2(0,1)
 @onready var starting_position := position
 @onready var animation_player := %AnimationPlayer
 @onready var sprite_2d := %Sprite2D
+@onready var interaction_zone: Area2D = %InteractionZone
 
 func _ready():
 	animation_player.play("idle_forwards")
@@ -58,7 +60,7 @@ func _unhandled_input(event: InputEvent):
 		throw()
 	if event.is_action_pressed("interact"):
 		interact()
-	if event.is_action_pressed("time_loop"):
+	if event.is_action_pressed("time_loop") and TimeLoopTimer.time_left != TimeLoopTimer.starting_time:
 		GameManager.time_loop()
 
 func time_loop():
@@ -75,5 +77,20 @@ func throw():
 
 
 func interact():
-	#TODO
-	pass
+	for node in interaction_zone.get_overlapping_bodies():
+		if node.has_method("interact"):
+			node.interact()
+
+func _on_screen_exited() -> void:
+	var main_camera : Camera2D = get_tree().get_first_node_in_group("MainCamera")
+	screen_exited.emit(position - main_camera.position)
+
+
+func _on_interaction_zone_body_entered(body: Node2D) -> void:
+	if body is TntSwitch:
+		body.selected = true
+
+
+func _on_interaction_zone_body_exited(body: Node2D) -> void:
+	if body is TntSwitch:
+		body.selected = false

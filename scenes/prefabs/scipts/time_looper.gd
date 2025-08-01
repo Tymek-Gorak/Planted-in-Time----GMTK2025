@@ -8,6 +8,7 @@ var cancel_loop := false:
 			modulate = Color.PURPLE
 		else:
 			modulate = Color.WHITE
+		cancel_loop = value
 
 @onready var starting_position := position
 
@@ -19,5 +20,3 @@ func time_loop():
 	if cancel_loop:
 		cancel_loop = false
 		return
-
-	position = starting_position

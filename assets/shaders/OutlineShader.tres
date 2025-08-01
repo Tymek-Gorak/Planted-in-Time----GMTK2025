@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://lnj4vncw1lc5"]
+
+[sub_resource type="Shader" id="Shader_sfsv2"]
+code = "shader_type canvas_item;
+
+uniform vec3 color : source_color;
+void fragment() {
+	COLOR = vec4(color, COLOR.a);
+}
+"
+
+[resource]
+shader = SubResource("Shader_sfsv2")
+shader_parameter/color = Color(1, 1, 0, 1)
